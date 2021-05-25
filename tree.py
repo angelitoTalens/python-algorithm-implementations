@@ -6,24 +6,19 @@ class Node():
 
 class Tree():
     def __init__(self, arr):
-        self.root = self.create_tree(arr)
+        self.root = self.create_level_order(arr, Node(arr[0]), 0)
 
-    def create_tree(self, arr):
-        return self._create_level_order(arr, Node(arr[0]), 0)
-
-    def _create_level_order(self, arr, root, i):
+    def create_level_order(self, arr, root, i):
         if i < len(arr):
             node = Node(arr[i])
 
             # add left node
-            node.left = self._create_level_order(arr, node.left, 2 * i + 1)
+            node.left = self.create_level_order(arr, node.left, 2 * i + 1)
 
             # add right node
-            node.right = self._create_level_order(arr, node.right, 2 * i + 2)
+            node.right = self.create_level_order(arr, node.right, 2 * i + 2)
 
             return node
-
-        return None
 
     def inorder_traversal(self, root):
         retval = []
