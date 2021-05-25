@@ -12,23 +12,16 @@ class Graph():
         self.graph[current].neighbors.append(neighbor)
 
     def bfs(self, start: int)->list:
-        result = []
-        result.append(start)
-
-        visited = set()
-        visited.add(start)
-
-        q = []
-        q.extend(self.graph[start].neighbors)   
+        visited = [start]
+        q = list(self.graph[start].neighbors)
                                    
         while q:
             n = q.pop(0)                       
             if n not in visited:
-                visited.add(n)
-                result.append(n)                
+                visited.append(n)                
                 q.extend(self.graph[n].neighbors)
         
-        return result
+        return visited
     
     def dfs(self, start: int)->list:
         visited = set()        
